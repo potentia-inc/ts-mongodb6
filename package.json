@@ -1,6 +1,6 @@
 {
   "name": "@potentia/mongodb6",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "utilities for mongodb^6.0.0",
   "main": "./index.js",
   "scripts": {

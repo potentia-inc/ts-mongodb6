@@ -32,6 +32,7 @@ export {
   ChangeStream,
   ChangeStreamOptions,
   Collection as MongoCollection,
+  CommandOperationOptions,
   DeleteOptions,
   Document,
   Filter,
