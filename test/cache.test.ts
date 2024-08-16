@@ -1,5 +1,5 @@
-import { Cache } from '../src/cache'
-import { sleep } from '../src/util'
+import { Cache } from '../src/cache.js'
+import { sleep } from '../src/util.js'
 
 describe('cache', () => {
   test('set() and get()', () => {

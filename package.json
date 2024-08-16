@@ -1,6 +1,6 @@
 {
   "name": "@potentia/mongodb6",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "utilities for mongodb^6.0.0",
   "main": "./index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "eslint-plugin-jest": "^27.0.0",
     "jest": "^29.0.0",
     "prettier": "^3.0.0",
-    "rimraf": "^5.0.0",
+    "rimraf": "^6.0.0",
     "typescript": "^5.0.0"
   },
   "peerDependencies": {

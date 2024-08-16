@@ -15,7 +15,7 @@ import {
   DisconnectedError,
   NotFoundError,
   TransactionError,
-} from '../src/error'
+} from '../src/error.js'
 import * as matchers from '../src/jest.js'
 import { UUID, toUUID } from '../src/type.js'
 

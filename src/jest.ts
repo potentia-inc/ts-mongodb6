@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-namespace */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-import BigNumber from 'bignumber.js'
+import { BigNumber } from 'bignumber.js'
 import {
   Binary,
   Decimal128,
@@ -34,6 +32,7 @@ interface CustomMatchers<R = unknown> {
 }
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Expect extends CustomMatchers {}
     interface Matchers<R> extends CustomMatchers<R> {}
