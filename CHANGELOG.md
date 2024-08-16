@@ -1,5 +1,8 @@
 # Change log
 
+## [1.0.2] - 2024-08-16
+
+Refine the tsconfig.json and upgrade packages
 
 ## [1.0.1] - 2024-04-30
 

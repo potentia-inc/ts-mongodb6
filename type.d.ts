@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Binary, Decimal128, ObjectId, UUID } from 'mongodb';
 export { Binary, Decimal128, ObjectId, UUID } from 'mongodb';
 declare const inspect: unique symbol;

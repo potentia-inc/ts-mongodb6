@@ -6,6 +6,10 @@ import { toObjectId, toUUID } from './type.js';
 import { isNil } from './util.js';
 export { AggregationCursor, ChangeStream, Collection as MongoCollection, FindCursor, } from 'mongodb';
 export class Collection {
+    generate;
+    name;
+    connection;
+    cache;
     get collection() {
         return this.connection.db.collection(this.name);
     }

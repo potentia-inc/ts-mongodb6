@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-namespace */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-import BigNumber from 'bignumber.js';
+import { BigNumber } from 'bignumber.js';
 import { Binary, Decimal128, ObjectId, UUID, toDecimal128, toBinary, toBuffer, toObjectId, toUUID, } from './type.js';
 import { matcherHint, printExpected, printReceived } from 'jest-matcher-utils';
 import { isNil } from './util.js';

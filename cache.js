@@ -1,10 +1,14 @@
 import assert from 'node:assert';
 import { isNil } from './util.js';
 export class Cache {
+    capacity;
+    ttl;
+    interval;
+    last;
+    map = new Map();
+    count = new Map();
+    list = [];
     constructor({ ttl, capacity, interval }) {
-        this.map = new Map();
-        this.count = new Map();
-        this.list = [];
         assert(capacity > 0);
         this.ttl = ttl ?? Infinity;
         this.capacity = capacity;

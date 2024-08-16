@@ -1,4 +1,3 @@
-/// <reference types="jest" />
 interface CustomMatchers<R = unknown> {
     toBeBinary: (this: unknown) => R;
     toEqualBinary: (this: unknown, expected: unknown) => R;

@@ -1,64 +1,52 @@
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-};
-var _Connection_client, _Connection_locking, _Connection_uri, _Connection_options;
 import { MongoClient, MongoError, } from 'mongodb';
 import { ConflictError, DisconnectedError, TransactionError } from './error.js';
 import { sleep } from './util.js';
 export class Connection {
+    #client = undefined;
+    #locking = false;
+    #uri;
+    #options;
     get client() {
-        if (__classPrivateFieldGet(this, _Connection_client, "f") === undefined)
+        if (this.#client === undefined)
             throw new DisconnectedError();
-        return __classPrivateFieldGet(this, _Connection_client, "f");
+        return this.#client;
     }
     get db() {
         return this.client.db();
     }
     constructor(uri, options) {
-        _Connection_client.set(this, undefined);
-        _Connection_locking.set(this, false);
-        _Connection_uri.set(this, void 0);
-        _Connection_options.set(this, void 0);
-        __classPrivateFieldSet(this, _Connection_uri, uri, "f");
-        __classPrivateFieldSet(this, _Connection_options, options, "f");
+        this.#uri = uri;
+        this.#options = options;
     }
     async connect() {
-        while (__classPrivateFieldGet(this, _Connection_client, "f") === undefined && __classPrivateFieldGet(this, _Connection_locking, "f"))
+        while (this.#client === undefined && this.#locking)
             await sleep(50);
-        if (__classPrivateFieldGet(this, _Connection_client, "f") !== undefined)
-            return __classPrivateFieldGet(this, _Connection_client, "f");
-        __classPrivateFieldSet(this, _Connection_locking, true, "f");
+        if (this.#client !== undefined)
+            return this.#client;
+        this.#locking = true;
         try {
-            __classPrivateFieldSet(this, _Connection_client, await MongoClient.connect(__classPrivateFieldGet(this, _Connection_uri, "f"), __classPrivateFieldGet(this, _Connection_options, "f")), "f");
+            this.#client = await MongoClient.connect(this.#uri, this.#options);
             ['error', 'timeout', 'parseError'].forEach((event) => {
-                __classPrivateFieldGet(this, _Connection_client, "f")?.on(event, (...args) => console.error(`db event ${event}: ${JSON.stringify(args)}`));
+                this.#client?.on(event, (...args) => console.error(`db event ${event}: ${JSON.stringify(args)}`));
             });
-            return __classPrivateFieldGet(this, _Connection_client, "f");
+            return this.#client;
         }
         finally {
-            __classPrivateFieldSet(this, _Connection_locking, false, "f");
+            this.#locking = false;
         }
     }
     async disconnect(force = false) {
-        while (__classPrivateFieldGet(this, _Connection_client, "f") !== undefined && __classPrivateFieldGet(this, _Connection_locking, "f"))
+        while (this.#client !== undefined && this.#locking)
             await sleep(50);
-        if (__classPrivateFieldGet(this, _Connection_client, "f") === undefined)
+        if (this.#client === undefined)
             return;
-        __classPrivateFieldSet(this, _Connection_locking, true, "f");
+        this.#locking = true;
         try {
-            await __classPrivateFieldGet(this, _Connection_client, "f").close(force);
-            __classPrivateFieldSet(this, _Connection_client, undefined, "f");
+            await this.#client.close(force);
+            this.#client = undefined;
         }
         finally {
-            __classPrivateFieldSet(this, _Connection_locking, false, "f");
+            this.#locking = false;
         }
     }
     async transaction(fn, options = {}) {
@@ -124,7 +112,6 @@ export class Connection {
         }
     }
 }
-_Connection_client = new WeakMap(), _Connection_locking = new WeakMap(), _Connection_uri = new WeakMap(), _Connection_options = new WeakMap();
 export function isTransactionError(err) {
     return (err instanceof MongoError &&
         err.errorLabels !== undefined &&
