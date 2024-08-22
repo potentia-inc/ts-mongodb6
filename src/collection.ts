@@ -25,6 +25,8 @@ import { Connection, isDuplicationError } from './connection.js'
 import { Cache, Options as CacheOptions } from './cache.js'
 import { ObjectId, UUID, toObjectId, toUUID } from './type.js'
 import { isNil } from './util.js'
+
+// XXX deprecated, use @mongodb6/type instead
 export {
   AggregateOptions,
   AggregationCursor,
