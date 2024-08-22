@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { Binary, Decimal128, ObjectId, UUID } from 'mongodb';
 import { isNil } from './util.js';
-export { Binary, Decimal128, ObjectId, UUID } from 'mongodb';
+export * from 'mongodb';
 const inspect = Symbol.for('nodejs.util.inspect.custom'); // for console.log etc
 Binary.prototype[Symbol.toPrimitive] = function (hint) {
     assert(hint !== 'number');

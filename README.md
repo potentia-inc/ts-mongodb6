@@ -17,6 +17,10 @@ Utilities for `Binary`, `Decimal128`, `UUID` and `ObjectId`
 
 ```typescript
 import {
+  Binary,
+  Decimal128,
+  ObjectId,
+  UUID,
   toBinary,
   toBinaryOrNil,
   toDecimal128,
@@ -25,8 +29,10 @@ import {
   toObjectIdOrNil,
   toUUID,
   toUUIDOrNil,
-} from '@potentia/mongodb'
-// or import { toBinary, ... } from '@potentia/mongodb/type'
+} from '@potentia/mongodb6'
+// or import { toBinary, ... } from '@potentia/mongodb6/type'
+
+// note: all other mongodb symbols are re-exported from '@potentia/mongodb6/type'
 
 toBinary('foobar') // create a new Binary from the given string
 toBinary(Buffer.from('foobar', 'base64')) // create a new Binary from the given Buffer
@@ -100,8 +106,8 @@ expect(objectId.toString()).toEqualObjectIdString(objectId)
 `MongoClient` wrapper for connection management
 
 ```typescript
-import { Connection } from '@potentia/mongodb'
-// or import { Connection } from '@potentia/mongodb/connection'
+import { Connection } from '@potentia/mongodb6'
+// or import { Connection } from '@potentia/mongodb6/connection'
 
 const connection = new Connection(
   'mongodb://...',
@@ -147,9 +153,9 @@ connection.db.collections() // get all collections
 Mongodb `Collection` wrapper for CRUD operaitons
 
 ```typescript
-import { Connection, UUID, toUUID } from '@potentia/mongodb'
-import { Collection, generateUUID } from '@potentia/mongodb'
-// or import { Collection, generateUUID } from '@potentia/mongodb/collection'
+import { Connection, UUID, toUUID } from '@potentia/mongodb6'
+import { Collection, generateUUID } from '@potentia/mongodb6'
+// or import { Collection, generateUUID } from '@potentia/mongodb6/collection'
 
 // a connection can be shared for all collections
 const connection = new Connection('mongodb://...')
@@ -253,7 +259,7 @@ import {
   ConflictError, // the document is duplicated
   TransactionError, // the transaction is failed
   UnacknowledgedError, // the writes are not acknowledged
-} from '@potentia/mongodb' // or '@potentia/mongodb/error'
+} from '@potentia/mongodb6' // or '@potentia/mongodb6/error'
 
 const err = new NotFoundError()
 assert(err instanceof NotFoundError)

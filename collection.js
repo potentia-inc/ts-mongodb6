@@ -4,6 +4,7 @@ import { isDuplicationError } from './connection.js';
 import { Cache } from './cache.js';
 import { toObjectId, toUUID } from './type.js';
 import { isNil } from './util.js';
+// XXX deprecated, use @mongodb6/type instead
 export { AggregationCursor, ChangeStream, Collection as MongoCollection, FindCursor, } from 'mongodb';
 export class Collection {
     generate;

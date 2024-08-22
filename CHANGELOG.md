@@ -1,5 +1,9 @@
 # Change log
 
+## [1.1.0] - 2024-08-22
+
+Re-export all symbols from mongodb
+
 ## [1.0.2] - 2024-08-16
 
 Refine the tsconfig.json and upgrade packages
