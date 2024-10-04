@@ -1,15 +1,15 @@
 services:
   mongo0:
-    image: mongo:6
+    image: mongo:7
     entrypoint: [/usr/bin/mongod, --bind_ip_all, --replSet, rs0]
   mongo1:
-    image: mongo:6
+    image: mongo:7
     entrypoint: [/usr/bin/mongod, --bind_ip_all, --replSet, rs0]
   mongo2:
-    image: mongo:6
+    image: mongo:7
     entrypoint: [/usr/bin/mongod, --bind_ip_all, --replSet, rs0]
   init-mongo:
-    image: mongo:6
+    image: mongo:7
     depends_on: [mongo0, mongo1, mongo2]
     restart: 'no'
     entrypoint: ['/bin/sh', '-c']
