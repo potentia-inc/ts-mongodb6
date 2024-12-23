@@ -1,9 +1,7 @@
 import { MongoClient, MongoError, } from 'mongodb';
 import { ConflictError, DisconnectedError, TransactionError } from './error.js';
-import { sleep } from './util.js';
 export class Connection {
     #client = undefined;
-    #locking = false;
     #uri;
     #options;
     get client() {
@@ -19,34 +17,21 @@ export class Connection {
         this.#options = options;
     }
     async connect() {
-        while (this.#client === undefined && this.#locking)
-            await sleep(50);
-        if (this.#client !== undefined)
-            return this.#client;
-        this.#locking = true;
-        try {
-            this.#client = await MongoClient.connect(this.#uri, this.#options);
+        if (this.#client === undefined) {
+            const client = await MongoClient.connect(this.#uri, this.#options);
             ['error', 'timeout', 'parseError'].forEach((event) => {
-                this.#client?.on(event, (...args) => console.error(`db event ${event}: ${JSON.stringify(args)}`));
+                client.on(event, (...args) => console.error(`db event ${event}: ${JSON.stringify(args)}`));
             });
-            return this.#client;
+            if (this.#client === undefined)
+                this.#client = client;
         }
-        finally {
-            this.#locking = false;
-        }
+        return this.#client;
     }
     async disconnect(force = false) {
-        while (this.#client !== undefined && this.#locking)
-            await sleep(50);
-        if (this.#client === undefined)
-            return;
-        this.#locking = true;
-        try {
-            await this.#client.close(force);
+        if (this.#client !== undefined) {
+            const client = this.#client;
             this.#client = undefined;
-        }
-        finally {
-            this.#locking = false;
+            await client.close(force);
         }
     }
     async transaction(fn, options = {}) {
