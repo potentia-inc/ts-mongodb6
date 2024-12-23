@@ -1,5 +1,9 @@
 # Change log
 
+## [1.1.0] - 2024-12-23
+
+Simplify connect() and disconnect() of Connection
+
 ## [1.1.0] - 2024-08-22
 
 Re-export all symbols from mongodb
