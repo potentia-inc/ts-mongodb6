@@ -1,6 +1,10 @@
 # Change log
 
-## [1.1.0] - 2024-12-23
+## [1.1.2] - 2025-01-02
+
+Refeine the isDuplicationError() check and upgrade to node-22
+
+## [1.1.1] - 2024-12-23
 
 Simplify connect() and disconnect() of Connection
 

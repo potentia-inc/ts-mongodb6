@@ -24,6 +24,8 @@ export class Connection {
             });
             if (this.#client === undefined)
                 this.#client = client;
+            else
+                client.close().catch(console.error);
         }
         return this.#client;
     }
@@ -104,7 +106,6 @@ export function isTransactionError(err) {
         err.errorLabels.includes('TransientTransactionError'));
 }
 export function isDuplicationError(err) {
-    return (err instanceof MongoError &&
-        err.message.startsWith('E11000 duplicate key error'));
+    return err instanceof MongoError && err.code === 11000;
 }
 //# sourceMappingURL=connection.js.map

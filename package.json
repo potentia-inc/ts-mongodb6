@@ -1,6 +1,6 @@
 {
   "name": "@potentia/mongodb6",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "utilities for mongodb^6.0.0",
   "main": "./index.js",
   "scripts": {
@@ -14,9 +14,9 @@
   "author": "Potentia Computing Inc.",
   "license": "MIT",
   "devDependencies": {
-    "@tsconfig/node20": "^20.0.0",
+    "@tsconfig/node22": "^22.0.0",
     "@types/jest": "^29.0.0",
-    "@types/node": "^20.0.0",
+    "@types/node": "^22.0.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "eslint": "^8.0.0",
@@ -42,6 +42,6 @@
     "./type": "./type.js"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   }
 }
