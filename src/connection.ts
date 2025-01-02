@@ -36,6 +36,7 @@ export class Connection {
         )
       })
       if (this.#client === undefined) this.#client = client
+      else client.close().catch(console.error)
     }
     return this.#client
   }
@@ -130,8 +131,5 @@ export function isTransactionError(err: unknown): boolean {
 }
 
 export function isDuplicationError(err: unknown): boolean {
-  return (
-    err instanceof MongoError &&
-    err.message.startsWith('E11000 duplicate key error')
-  )
+  return err instanceof MongoError && err.code === 11000
 }

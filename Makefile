@@ -1,6 +1,6 @@
 .PHONY: test clean lint prettier dist
 
-IMAGE=node:20-slim
+IMAGE=node:22-slim
 USER=$(shell id -u):$(shell id -g)
 WORKDIR=/app
 VOLUME=$(PWD):$(WORKDIR)
