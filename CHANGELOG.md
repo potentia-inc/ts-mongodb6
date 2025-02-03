@@ -1,5 +1,9 @@
 # Change log
 
+## [1.1.3] - 2025-02-03
+
+Upgrade packages
+
 ## [1.1.2] - 2025-01-02
 
 Refeine the isDuplicationError() check and upgrade to node-22

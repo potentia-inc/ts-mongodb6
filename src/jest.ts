@@ -34,9 +34,11 @@ interface CustomMatchers<R = unknown> {
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
+    /* eslint-disable @typescript-eslint/no-empty-object-type */
     interface Expect extends CustomMatchers {}
     interface Matchers<R> extends CustomMatchers<R> {}
     interface InverseAsymmetricMatchers extends CustomMatchers {}
+    /* eslint-enable @typescript-eslint/no-empty-object-type */
   }
 }
 
@@ -342,6 +344,7 @@ function isObjectIdString(x: unknown): boolean {
       toObjectId(x)
       return true
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     // supress all error
   }
@@ -354,6 +357,7 @@ function isUUIDString(x: unknown): boolean {
       toUUID(x)
       return true
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     // supress all error
   }
