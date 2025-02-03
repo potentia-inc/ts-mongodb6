@@ -109,6 +109,7 @@ export function toBuffer(x: unknown): Buffer {
     for (const encoding of BUFFER_ENCODINGS) {
       try {
         return Buffer.from(x, encoding)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         // ignore and try the next encoding
       }

@@ -36,3 +36,9 @@ services:
     environment:
       MONGO_URI: mongodb://mongo0,mongo1,mongo2/test?replicaSet=rs0
     restart: 'no'
+    entrypoint: ['/bin/sh', '-c']
+    command:
+      - |
+        npm run lint
+        npm run pretty
+        npm run test

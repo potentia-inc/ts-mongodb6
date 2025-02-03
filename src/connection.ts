@@ -80,6 +80,7 @@ export class Connection {
     const collection = await (async () => {
       try {
         return await this.db.createCollection<Doc>(name)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         return this.db.collection<Doc>(name)
       }
