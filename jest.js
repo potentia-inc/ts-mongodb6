@@ -146,6 +146,7 @@ function isObjectIdString(x) {
             toObjectId(x);
             return true;
         }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     }
     catch (err) {
         // supress all error
@@ -158,6 +159,7 @@ function isUUIDString(x) {
             toUUID(x);
             return true;
         }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     }
     catch (err) {
         // supress all error
