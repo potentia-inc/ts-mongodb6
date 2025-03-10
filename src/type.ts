@@ -4,6 +4,7 @@ import { Binary, Decimal128, ObjectId, UUID } from 'mongodb'
 import { isNil } from './util.js'
 
 export * from 'mongodb'
+export type Uuid = UUID
 
 const inspect = Symbol.for('nodejs.util.inspect.custom') // for console.log etc
 
@@ -159,4 +160,12 @@ export function toUUID(x?: unknown): UUID {
 
 export function toUUIDOrNil(x?: unknown): UUID | undefined {
   return isNil(x) ? undefined : toUUID(x)
+}
+
+export function toUuid(x?: unknown): Uuid {
+  return toUUID(x)
+}
+
+export function toUuidOrNil(x?: unknown): Uuid | undefined {
+  return toUUIDOrNil(x)
 }

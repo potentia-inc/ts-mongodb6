@@ -21,6 +21,7 @@ import {
   Decimal128,
   ObjectId,
   UUID,
+  Uuid, // alias of UUID
   toBinary,
   toBinaryOrNil,
   toDecimal128,
@@ -28,7 +29,9 @@ import {
   toObjectId,
   toObjectIdOrNil,
   toUUID,
+  toUuid, // alias of toUUID
   toUUIDOrNil,
+  toUuidOrNil, // alias of toUUIDOrNil
 } from '@potentia/mongodb6'
 // or import { toBinary, ... } from '@potentia/mongodb6/type'
 
@@ -254,6 +257,7 @@ Errors for mongodb operations
 import assert from 'node:assert'
 import {
   DBError, // base class for other errors
+  DbError, // alias of DBError
   DisconnectedError, // the connection is disconnected
   NotFoundError, // the document is not found
   ConflictError, // the document is duplicated
