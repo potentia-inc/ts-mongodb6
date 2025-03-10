@@ -1,5 +1,9 @@
 # Change log
 
+## [1.2.0] - 2025-03-10
+
+Support both UUID/Uuid, DBError/DbError and upgrade packages
+
 ## [1.1.3] - 2025-02-03
 
 Upgrade packages
