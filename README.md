@@ -21,6 +21,7 @@ import {
   Decimal128,
   ObjectId,
   UUID,
+  Uuid, // alias of UUID
   toBinary,
   toBinaryOrNil,
   toDecimal128,
@@ -28,11 +29,13 @@ import {
   toObjectId,
   toObjectIdOrNil,
   toUUID,
+  toUuid, // alias of toUUID
   toUUIDOrNil,
+  toUuidOrNil, // alias of toUUIDOrNil
 } from '@potentia/mongodb6'
 // or import { toBinary, ... } from '@potentia/mongodb6/type'
 
-// note: all other mongodb symbols are re-exported from '@potentia/mongodb6/type'
+// note: all other mongodb symbols are re-exported from '@potentia/mongodb6/mongo'
 
 toBinary('foobar') // create a new Binary from the given string
 toBinary(Buffer.from('foobar', 'base64')) // create a new Binary from the given Buffer
@@ -254,6 +257,7 @@ Errors for mongodb operations
 import assert from 'node:assert'
 import {
   DBError, // base class for other errors
+  DbError, // alias of DBError
   DisconnectedError, // the connection is disconnected
   NotFoundError, // the document is not found
   ConflictError, // the document is duplicated

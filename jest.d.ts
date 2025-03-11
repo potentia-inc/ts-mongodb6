@@ -14,6 +14,10 @@ interface CustomMatchers<R = unknown> {
     toBeUUIDString: (this: unknown) => R;
     toEqualUUID: (this: unknown, expected: unknown) => R;
     toEqualUUIDString: (this: unknown, expected: unknown) => R;
+    toBeUuid: (this: unknown) => R;
+    toBeUuidString: (this: unknown) => R;
+    toEqualUuid: (this: unknown, expected: unknown) => R;
+    toEqualUuidString: (this: unknown, expected: unknown) => R;
 }
 declare global {
     namespace jest {
@@ -40,4 +44,8 @@ export declare function toBeUUID(this: unknown, received: unknown): jest.CustomM
 export declare function toEqualUUID(this: unknown, received: unknown, expected: unknown): jest.CustomMatcherResult;
 export declare function toBeUUIDString(this: unknown, received: unknown): jest.CustomMatcherResult;
 export declare function toEqualUUIDString(this: unknown, received: unknown, expected: unknown): jest.CustomMatcherResult;
+export declare function toBeUuid(this: unknown, received: unknown): jest.CustomMatcherResult;
+export declare function toEqualUuid(this: unknown, received: unknown, expected: unknown): jest.CustomMatcherResult;
+export declare function toBeUuidString(this: unknown, received: unknown): jest.CustomMatcherResult;
+export declare function toEqualUuidString(this: unknown, received: unknown, expected: unknown): jest.CustomMatcherResult;
 export {};

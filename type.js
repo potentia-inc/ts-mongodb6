@@ -1,7 +1,9 @@
 import assert from 'node:assert';
-import { Binary, Decimal128, ObjectId, UUID } from 'mongodb';
+import { toUUID } from './core.js';
+import { Binary, Decimal128, ObjectId, UUID } from './mongo.js';
 import { isNil } from './util.js';
-export * from 'mongodb';
+export { UUID, UUID as Uuid, toUUID, toUUID as toUuid, toUUIDOrNil, toUUIDOrNil as toUuidOrNil, } from './core.js';
+export { Binary, Decimal128, ObjectId } from './mongo.js';
 const inspect = Symbol.for('nodejs.util.inspect.custom'); // for console.log etc
 Binary.prototype[Symbol.toPrimitive] = function (hint) {
     assert(hint !== 'number');
@@ -112,20 +114,5 @@ export function toObjectId(x) {
 }
 export function toObjectIdOrNil(x) {
     return isNil(x) ? undefined : toObjectId(x);
-}
-export function toUUID(x) {
-    if (x instanceof UUID)
-        return x;
-    if (x instanceof Binary) {
-        assert(x.sub_type === Binary.SUBTYPE_UUID);
-        return x.toUUID();
-    }
-    if (isNil(x) || Buffer.isBuffer(x) || typeof x === 'string') {
-        return new UUID(x);
-    }
-    return new UUID(String(x));
-}
-export function toUUIDOrNil(x) {
-    return isNil(x) ? undefined : toUUID(x);
 }
 //# sourceMappingURL=type.js.map

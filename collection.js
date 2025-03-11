@@ -1,9 +1,10 @@
 import assert from 'node:assert';
-import { ConflictError, NotFoundError, UnacknowledgedError } from './error.js';
-import { isDuplicationError } from './connection.js';
 import { Cache } from './cache.js';
-import { toObjectId, toUUID } from './type.js';
+import { isDuplicationError } from './connection.js';
+import { ConflictError, NotFoundError, UnacknowledgedError } from './error.js';
+import { toObjectId } from './type.js';
 import { isNil } from './util.js';
+export { generateUUID, generateUUID as generateUuid } from './core.js';
 // XXX deprecated, use @mongodb6/type instead
 export { AggregationCursor, ChangeStream, Collection as MongoCollection, FindCursor, } from 'mongodb';
 export class Collection {
@@ -146,9 +147,6 @@ export class Collection {
 export function generate(id) {
     assert(!isNil(id));
     return id;
-}
-export function generateUUID(id) {
-    return id ?? toUUID();
 }
 export function generateObjectId(id) {
     return id ?? toObjectId();

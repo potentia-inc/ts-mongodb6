@@ -1,29 +1,26 @@
-export class DBError extends Error {
-    constructor(message) {
-        super(message ?? 'Unknown DB Error');
-    }
-}
-export class DisconnectedError extends DBError {
+import { DbError } from './core.js';
+export { DbError, DbError as DBError } from './core.js';
+export class DisconnectedError extends DbError {
     constructor(message) {
         super(message ?? 'Disconnected');
     }
 }
-export class NotFoundError extends DBError {
+export class NotFoundError extends DbError {
     constructor(message) {
         super(message ?? 'Not Found');
     }
 }
-export class ConflictError extends DBError {
+export class ConflictError extends DbError {
     constructor(message) {
         super(message ?? 'Conflict');
     }
 }
-export class TransactionError extends DBError {
+export class TransactionError extends DbError {
     constructor(message) {
         super(message ?? 'Transaction Error');
     }
 }
-export class UnacknowledgedError extends DBError {
+export class UnacknowledgedError extends DbError {
     constructor(message) {
         super(message ?? 'Unacknowledged');
     }

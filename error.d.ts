@@ -1,18 +1,17 @@
-export declare class DBError extends Error {
+import { DbError } from './core.js';
+export { DbError, DbError as DBError } from './core.js';
+export declare class DisconnectedError extends DbError {
     constructor(message?: string);
 }
-export declare class DisconnectedError extends DBError {
+export declare class NotFoundError extends DbError {
     constructor(message?: string);
 }
-export declare class NotFoundError extends DBError {
+export declare class ConflictError extends DbError {
     constructor(message?: string);
 }
-export declare class ConflictError extends DBError {
+export declare class TransactionError extends DbError {
     constructor(message?: string);
 }
-export declare class TransactionError extends DBError {
-    constructor(message?: string);
-}
-export declare class UnacknowledgedError extends DBError {
+export declare class UnacknowledgedError extends DbError {
     constructor(message?: string);
 }

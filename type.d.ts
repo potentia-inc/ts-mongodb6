@@ -1,5 +1,6 @@
-import { Binary, Decimal128, ObjectId, UUID } from 'mongodb';
-export * from 'mongodb';
+import { Binary, Decimal128, ObjectId } from './mongo.js';
+export { UUID, UUID as Uuid, toUUID, toUUID as toUuid, toUUIDOrNil, toUUIDOrNil as toUuidOrNil, } from './core.js';
+export { Binary, Decimal128, ObjectId } from './mongo.js';
 declare const inspect: unique symbol;
 declare module 'mongodb' {
     interface Binary {
@@ -28,5 +29,3 @@ export declare function toDecimal128(x: unknown, round?: boolean): Decimal128;
 export declare function toDecimal128OrNil(x?: unknown): Decimal128 | undefined;
 export declare function toObjectId(x?: unknown): ObjectId;
 export declare function toObjectIdOrNil(x?: unknown): ObjectId | undefined;
-export declare function toUUID(x?: unknown): UUID;
-export declare function toUUIDOrNil(x?: unknown): UUID | undefined;

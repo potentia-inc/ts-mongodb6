@@ -1,7 +1,8 @@
-import { AggregateOptions, AggregationCursor, BulkWriteOptions, ChangeStream, ChangeStreamOptions, Collection as MongoCollection, DeleteOptions, Document, Filter, FindCursor, FindOneAndUpdateOptions, FindOptions, InsertOneOptions, OptionalId, Sort, UpdateFilter, UpdateOptions, WithId } from 'mongodb';
-import { Connection } from './connection.js';
 import { Cache, Options as CacheOptions } from './cache.js';
-import { ObjectId, UUID } from './type.js';
+import { Connection } from './connection.js';
+import { AggregateOptions, AggregationCursor, BulkWriteOptions, ChangeStream, ChangeStreamOptions, Collection as MongoCollection, DeleteOptions, Document, Filter, FindCursor, FindOneAndUpdateOptions, FindOptions, InsertOneOptions, OptionalId, Sort, UpdateFilter, UpdateOptions, WithId } from './mongo.js';
+import { ObjectId } from './type.js';
+export { generateUUID, generateUUID as generateUuid } from './core.js';
 export { AggregateOptions, AggregationCursor, BulkWriteOptions, ChangeStream, ChangeStreamOptions, Collection as MongoCollection, CommandOperationOptions, DeleteOptions, Document, Filter, FindCursor, FindOneAndUpdateOptions, FindOptions, InsertOneOptions, OptionalId, OptionalUnlessRequiredId, Sort, UpdateFilter, UpdateOptions, WithId, } from 'mongodb';
 export type CollectionOptions<Doc extends Document> = {
     connection: Connection;
@@ -35,5 +36,4 @@ export declare class Collection<Doc extends Document> {
     deleteMany(filter: Filter<Doc>, options?: DeleteOptions): Promise<number>;
 }
 export declare function generate<T>(id?: T): T;
-export declare function generateUUID(id?: UUID): UUID;
 export declare function generateObjectId(id?: ObjectId): ObjectId;
