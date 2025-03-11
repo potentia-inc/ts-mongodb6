@@ -1,4 +1,7 @@
 import assert from 'node:assert'
+import { Cache, Options as CacheOptions } from './cache.js'
+import { Connection, isDuplicationError } from './connection.js'
+import { ConflictError, NotFoundError, UnacknowledgedError } from './error.js'
 import {
   AggregateOptions,
   AggregationCursor,
@@ -19,12 +22,11 @@ import {
   UpdateFilter,
   UpdateOptions,
   WithId,
-} from 'mongodb'
-import { ConflictError, NotFoundError, UnacknowledgedError } from './error.js'
-import { Connection, isDuplicationError } from './connection.js'
-import { Cache, Options as CacheOptions } from './cache.js'
-import { ObjectId, UUID, toObjectId, toUUID } from './type.js'
+} from './mongo.js'
+import { ObjectId, toObjectId } from './type.js'
 import { isNil } from './util.js'
+
+export { generateUUID, generateUUID as generateUuid } from './core.js'
 
 // XXX deprecated, use @mongodb6/type instead
 export {
@@ -261,10 +263,6 @@ export class Collection<Doc extends Document> {
 export function generate<T>(id?: T): T {
   assert(!isNil(id))
   return id
-}
-
-export function generateUUID(id?: UUID): UUID {
-  return id ?? toUUID()
 }
 
 export function generateObjectId(id?: ObjectId): ObjectId {

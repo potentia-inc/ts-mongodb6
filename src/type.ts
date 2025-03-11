@@ -1,9 +1,18 @@
 import assert from 'node:assert'
 import type { Decimal128Extended } from 'bson'
-import { Binary, Decimal128, ObjectId, UUID } from 'mongodb'
+import { toUUID } from './core.js'
+import { Binary, Decimal128, ObjectId, UUID } from './mongo.js'
 import { isNil } from './util.js'
 
-export * from 'mongodb'
+export {
+  UUID,
+  UUID as Uuid,
+  toUUID,
+  toUUID as toUuid,
+  toUUIDOrNil,
+  toUUIDOrNil as toUuidOrNil,
+} from './core.js'
+export { Binary, Decimal128, ObjectId } from './mongo.js'
 
 const inspect = Symbol.for('nodejs.util.inspect.custom') // for console.log etc
 
@@ -143,20 +152,4 @@ export function toObjectId(x?: unknown): ObjectId {
 
 export function toObjectIdOrNil(x?: unknown): ObjectId | undefined {
   return isNil(x) ? undefined : toObjectId(x)
-}
-
-export function toUUID(x?: unknown): UUID {
-  if (x instanceof UUID) return x
-  if (x instanceof Binary) {
-    assert(x.sub_type === Binary.SUBTYPE_UUID)
-    return x.toUUID()
-  }
-  if (isNil(x) || Buffer.isBuffer(x) || typeof x === 'string') {
-    return new UUID(x)
-  }
-  return new UUID(String(x))
-}
-
-export function toUUIDOrNil(x?: unknown): UUID | undefined {
-  return isNil(x) ? undefined : toUUID(x)
 }
