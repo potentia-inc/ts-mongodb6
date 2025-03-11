@@ -29,6 +29,10 @@ interface CustomMatchers<R = unknown> {
   toBeUUIDString: (this: unknown) => R
   toEqualUUID: (this: unknown, expected: unknown) => R
   toEqualUUIDString: (this: unknown, expected: unknown) => R
+  toBeUuid: (this: unknown) => R
+  toBeUuidString: (this: unknown) => R
+  toEqualUuid: (this: unknown, expected: unknown) => R
+  toEqualUuidString: (this: unknown, expected: unknown) => R
 }
 
 declare global {
@@ -261,7 +265,117 @@ export function toBeUUID(
   this: unknown,
   received: unknown,
 ): jest.CustomMatcherResult {
+  return _toBeUUID(this, received)
+  /*
   const { isNot, promise } = this as unknown as This
+  const comment = 'UUID type validity'
+  const options = { comment, isNot, promise }
+  const pass = received instanceof UUID
+  const message = getMessage(
+    pass,
+    matcherHint('toBeUUID', undefined, undefined, options),
+    printReceived(received),
+    printExpected('UUID'),
+  )
+  return { message, pass }
+  */
+}
+
+export function toEqualUUID(
+  this: unknown,
+  received: unknown,
+  expected: unknown,
+): jest.CustomMatcherResult {
+  return _toEqualUUID(this, received, expected)
+  /*
+  const { isNot, promise } = this as unknown as This
+  const comment = 'UUID type and optional value equality'
+  const options = { comment, isNot, promise }
+  const pass = received instanceof UUID && received.equals(toUUID(expected))
+  const message = getMessage(
+    pass,
+    matcherHint('toEqualUUID', undefined, undefined, options),
+    printReceived(received),
+    printExpected(toUUID(expected)?.toString()),
+  )
+  return { message, pass }
+  */
+}
+
+export function toBeUUIDString(
+  this: unknown,
+  received: unknown,
+): jest.CustomMatcherResult {
+  return _toBeUUIDString(this, received)
+  /*
+  const { isNot, promise } = this as unknown as This
+  const comment = 'UUID string type validity'
+  const options = { comment, isNot, promise }
+  const pass = isUUIDString(received)
+  const message = getMessage(
+    pass,
+    matcherHint('toBeUUIDString', undefined, undefined, options),
+    printReceived(received),
+    printExpected('UUID string'),
+  )
+  return { message, pass }
+  */
+}
+
+export function toEqualUUIDString(
+  this: unknown,
+  received: unknown,
+  expected: unknown,
+): jest.CustomMatcherResult {
+  return _toEqualUUIDString(this, received, expected)
+  /*
+  const { isNot, promise } = this as unknown as This
+  const comment = 'UUID string type and optional value equality'
+  const options = { comment, isNot, promise }
+  const pass =
+    isUUIDString(received) && toUUID(received).equals(toUUID(expected))
+  const message = getMessage(
+    pass,
+    matcherHint('toEqualUUIDString', undefined, undefined, options),
+    printReceived(received),
+    printExpected(toUUID(expected)?.toString()),
+  )
+  return { message, pass }
+  */
+}
+
+export function toBeUuid(
+  this: unknown,
+  received: unknown,
+): jest.CustomMatcherResult {
+  return _toBeUUID(this, received)
+}
+
+export function toEqualUuid(
+  this: unknown,
+  received: unknown,
+  expected: unknown,
+): jest.CustomMatcherResult {
+  return _toEqualUUID(this, received, expected)
+}
+
+export function toBeUuidString(
+  this: unknown,
+  received: unknown,
+): jest.CustomMatcherResult {
+  return _toBeUUIDString(this, received)
+}
+
+export function toEqualUuidString(
+  this: unknown,
+  received: unknown,
+  expected: unknown,
+): jest.CustomMatcherResult {
+  return _toEqualUUIDString(this, received, expected)
+}
+
+function _toBeUUID(that: unknown, received: unknown): jest.CustomMatcherResult {
+  const { isNot, promise } = that as unknown as This
   const comment = 'UUID type validity'
   const options = { comment, isNot, promise }
   const pass = received instanceof UUID
@@ -274,12 +388,12 @@ export function toBeUUID(
   return { message, pass }
 }
 
-export function toEqualUUID(
-  this: unknown,
+function _toEqualUUID(
+  that: unknown,
   received: unknown,
   expected: unknown,
 ): jest.CustomMatcherResult {
-  const { isNot, promise } = this as unknown as This
+  const { isNot, promise } = that as unknown as This
   const comment = 'UUID type and optional value equality'
   const options = { comment, isNot, promise }
   const pass = received instanceof UUID && received.equals(toUUID(expected))
@@ -292,11 +406,11 @@ export function toEqualUUID(
   return { message, pass }
 }
 
-export function toBeUUIDString(
-  this: unknown,
+function _toBeUUIDString(
+  that: unknown,
   received: unknown,
 ): jest.CustomMatcherResult {
-  const { isNot, promise } = this as unknown as This
+  const { isNot, promise } = that as unknown as This
   const comment = 'UUID string type validity'
   const options = { comment, isNot, promise }
   const pass = isUUIDString(received)
@@ -309,12 +423,12 @@ export function toBeUUIDString(
   return { message, pass }
 }
 
-export function toEqualUUIDString(
-  this: unknown,
+function _toEqualUUIDString(
+  that: unknown,
   received: unknown,
   expected: unknown,
 ): jest.CustomMatcherResult {
-  const { isNot, promise } = this as unknown as This
+  const { isNot, promise } = that as unknown as This
   const comment = 'UUID string type and optional value equality'
   const options = { comment, isNot, promise }
   const pass =

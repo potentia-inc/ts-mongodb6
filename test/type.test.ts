@@ -9,7 +9,9 @@ import {
   toObjectId,
   toObjectIdOrNil,
   toUUID,
+  toUuid,
   toUUIDOrNil,
+  toUuidOrNil,
 } from '../src/type.js'
 import * as matchers from '../src/jest.js'
 
@@ -150,6 +152,38 @@ describe('UUID', () => {
     expect(toUUIDOrNil(null)).toBeUndefined()
     expect(toUUIDOrNil(undefined)).toBeUndefined()
     expect(toUUIDOrNil('60456314-8bf5-48a1-b51b-726037a6e8b9')).toBeUUID()
+  })
+
+  test('toBeUuid() and toEqualUuid()', () => {
+    const a = toUuid()
+    expect(a).toBeUuid()
+    expect('foobar').not.toBeUuid()
+    expect(toUuid({ toString: () => a.toString() })).toBeUuid()
+    expect(toUuid(toUuid().toBinary())).toBeUuid()
+
+    expect(a).toEqualUuid(a)
+    expect('foobar').not.toEqualUuid(a)
+    expect(a).toEqualUuid(a.toString())
+    expect(a).not.toEqualUuid(toUuid())
+    expect(a).not.toEqualUuid(toUuid().toString())
+
+    const astr = a.toString()
+    expect(astr).toBeUuidString()
+    expect(a).not.toBeUuidString()
+    expect('foobar').not.toBeUuidString()
+
+    expect(astr).toEqualUuidString(a)
+    expect(a).not.toEqualUuidString(a)
+    expect('foobar').not.toEqualUuidString(a)
+    expect(astr).toEqualUuidString(a.toString())
+    expect(astr).not.toEqualUuidString(toUuid())
+    expect(astr).not.toEqualUuidString(toUuid().toString())
+  })
+
+  test('toUuidOrNil()', () => {
+    expect(toUuidOrNil(null)).toBeUndefined()
+    expect(toUuidOrNil(undefined)).toBeUndefined()
+    expect(toUuidOrNil('60456314-8bf5-48a1-b51b-726037a6e8b9')).toBeUUID()
   })
 })
 

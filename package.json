@@ -41,6 +41,7 @@
     "./connection": "./connection.js",
     "./error": "./error.js",
     "./jest": "./jest.js",
+    "./mongo": "./mongo.js",
     "./type": "./type.js"
   },
   "engines": {

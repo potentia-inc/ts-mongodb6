@@ -1,10 +1,5 @@
-export class DbError extends Error {
-  constructor(message?: string) {
-    super(message ?? 'Unknown DB Error')
-  }
-}
-
-export type DBError = DbError
+import { DbError } from './core.js'
+export { DbError, DbError as DBError } from './core.js'
 
 export class DisconnectedError extends DbError {
   constructor(message?: string) {

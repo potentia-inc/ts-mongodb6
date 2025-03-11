@@ -35,7 +35,7 @@ import {
 } from '@potentia/mongodb6'
 // or import { toBinary, ... } from '@potentia/mongodb6/type'
 
-// note: all other mongodb symbols are re-exported from '@potentia/mongodb6/type'
+// note: all other mongodb symbols are re-exported from '@potentia/mongodb6/mongo'
 
 toBinary('foobar') // create a new Binary from the given string
 toBinary(Buffer.from('foobar', 'base64')) // create a new Binary from the given Buffer
