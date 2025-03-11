@@ -1,5 +1,10 @@
 # Change log
 
+## [2.0.0] - 2025-03-11
+
+ - Alias UUID as Uuid, DBError as DbError
+ - Re-export all mongodb symbols in `mongodb6/mongo` instead of `mongodb6/type`
+
 ## [1.1.3] - 2025-02-03
 
 Upgrade packages
